@@ -1,0 +1,335 @@
+:root {
+  --primary-color: #1e40af; /* Dark Blue */
+  --secondary-color: #34d399; /* Green */
+  --warning-color: #f87171; /* Red */
+  --bg-color: #f4f6f8;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: var(--bg-color);
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: 100vh;
+}
+
+/* --- Page Toggling --- */
+.page {
+  width: 100%;
+  transition: opacity 0.3s ease-in-out;
+}
+.sub-page {
+  display: none;
+  padding: 2rem;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  margin: 1.5rem auto; 
+}
+.active-page {
+  display: flex; 
+}
+.active-sub-page {
+  display: block;
+}
+
+/* --- Login Page Styles --- */
+#loginPage {
+  background: linear-gradient(135deg, #3b82f6, var(--primary-color));
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+.login-box {
+  background-color: white;
+  padding: 3rem;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+  text-align: center;
+  width: 350px;
+}
+.login-box h1 {
+  color: var(--primary-color);
+  margin-bottom: 2rem;
+}
+.login-box input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  box-sizing: border-box;
+}
+.demo-creds {
+    font-size: 0.8rem;
+    color: #6b7280;
+    margin-top: 15px;
+}
+
+/* --- Navbar Styles --- */
+.navbar {
+  background-color: var(--primary-color);
+  color: white;
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  width: 100%;
+}
+.navbar .logo {
+  font-size: 1.4rem;
+  font-weight: bold;
+}
+.nav-links a {
+  color: white;
+  text-decoration: none;
+  margin-left: 1.5rem;
+  padding: 0.5rem;
+  border-radius: 4px;
+  transition: background-color 0.2s;
+}
+.nav-links a:hover {
+  background-color: #3b82f6;
+}
+.logout-btn {
+    background-color: var(--warning-color);
+}
+.logout-btn:hover {
+    background-color: #dc2626;
+}
+
+/* --- General Content Styles --- */
+.content-wrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+  flex-grow: 1; 
+  display: flex;
+  flex-direction: column;
+  justify-content: center; 
+  align-items: center; 
+}
+h2 {
+  color: var(--primary-color);
+  margin-top: 0;
+  border-bottom: 2px solid #e5e7eb;
+  padding-bottom: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+button {
+  background-color: var(--primary-color);
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.2s, transform 0.1s;
+}
+button:hover {
+  background-color: #3b82f6;
+}
+button:active {
+  transform: scale(0.98);
+}
+.mt-4 {
+  margin-top: 1.5rem;
+}
+
+/* --- Home Page Specific Styling (with Image Background) --- */
+#homePage {
+  background-image: url('https://image.pollinations.ai/prompt/Smart%20factory%20interior%20with%20robotic%20arms,%20AGVs,%20holographic%20displays%20showing%20data,%20server%20racks,%20futuristic,%20dark%20blue%20and%20neon%20green%20lighting,%203d%20render,%20photorealistic'); 
+  background-size: cover; 
+  background-position: center center; 
+  background-repeat: no-repeat; 
+  display: flex; 
+  align-items: center; 
+  justify-content: center; 
+  text-align: center;
+  color: white; 
+  min-height: calc(100vh - 80px); 
+  flex-direction: column; 
+  position: relative; 
+  overflow: hidden; 
+}
+/* Overlay for readability */
+#homePage::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5); /* Dark overlay */
+  z-index: 1; 
+}
+
+.homepage-content {
+  position: relative; 
+  z-index: 2;
+  padding: 2rem;
+  max-width: 800px;
+  background-color: rgba(255, 255, 255, 0.1); 
+  border-radius: 10px;
+}
+
+#homePage h2 {
+  color: white; 
+  border-bottom-color: rgba(255, 255, 255, 0.3); 
+}
+
+#homePage p {
+  color: #e0e0e0; 
+}
+
+/* Home Page Modules */
+.module-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+.module-btn {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: 1.5rem;
+  border: 1px solid #ddd;
+  background-color: rgba(255, 255, 255, 0.2);
+  color: white;
+  transition: all 0.2s;
+}
+.module-btn:hover {
+  box-shadow: 0 4px 15px rgba(255,255,255,0.2);
+  transform: translateY(-3px);
+  background-color: rgba(255, 255, 255, 0.4);
+}
+.module-btn h3 {
+    margin-top: 0;
+    color: white;
+}
+
+/* New style for the bottleneck description note */
+.description-note {
+    background-color: #eef2ff; /* Light blue background */
+    border-left: 4px solid var(--primary-color);
+    padding: 0.75rem 1rem;
+    margin-bottom: 1.5rem;
+    border-radius: 4px;
+    color: #1e40af;
+    font-size: 0.95rem;
+}
+
+/* --- Input and Results Grid --- */
+.input-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+.input-group {
+    padding: 1rem;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    background-color: #ffffff;
+}
+.input-group h4 {
+  margin-top: 0;
+  color: #4b5563;
+}
+.input-group input {
+  width: 100%;
+  padding: 8px;
+  margin-top: 5px;
+  margin-bottom: 10px; /* Adjusted margin for better spacing */
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.results-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+/* --- Machine Result Cards (The Rectangular Boxes) --- */
+.machine-card {
+  padding: 1.5rem;
+  border-radius: 10px;
+  border-left: 5px solid var(--secondary-color);
+  box-shadow: 0 1px 6px rgba(0,0,0,0.08);
+  background-color: #f7ffee; 
+  transition: transform 0.2s;
+}
+.machine-card:hover {
+  transform: translateY(-2px);
+}
+.machine-card h3 {
+  margin-top: 0;
+  color: var(--primary-color);
+}
+.machine-card p {
+    margin: 0.5rem 0;
+    font-size: 0.95rem;
+}
+
+/* Bottleneck Specific Style */
+.machine-card.bottleneck {
+  border-left-color: var(--warning-color);
+  background-color: #fff5f5; 
+}
+.machine-card.bottleneck .status {
+    color: var(--warning-color);
+    font-weight: bold;
+}
+
+/* High Cost Specific Style */
+.machine-card.high-cost {
+    border-left-color: orange;
+    background-color: #fffbeb;
+}
+
+/* Alert Button */
+.alert-btn {
+    background-color: var(--warning-color);
+    margin-top: 1rem;
+    padding: 0.5rem 1rem;
+}
+.alert-btn:hover {
+    background-color: #dc2626;
+}
+
+/* Chart Styles */
+.chart-container {
+  background-color: white;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+/* --- CSS: style.css (Add this to your existing styles) --- */
+
+/* Style for the Lost Output text */
+.lost-output-alert {
+    color: #dc2626; /* Red for alert */
+    font-weight: bold;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    padding: 5px;
+    border: 1px dashed #f87171;
+    border-radius: 4px;
+    background-color: #fff8f8;
+}
+
+/* Style for the new time breakdown section */
+.time-breakdown {
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+    padding: 0.5rem;
+    background-color: #f7f9ff;
+    border-radius: 4px;
+    border-left: 3px solid var(--primary-color);
+}

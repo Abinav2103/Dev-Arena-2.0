@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Smart Factory Dashboard</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link rel="stylesheet" href="style.css"> 
+</head>
+<body>
+
+  <div id="loginPage" class="page active-page">
+    <div class="login-box">
+      <h1>🏭 Factory Dashboard Login</h1>
+      <input type="text" id="username" placeholder="Username">
+      <input type="password" id="password" placeholder="Password">
+      <button onclick="login()">Log In</button>
+      <p class="signup-text">Don't have an account? <a href="#" onclick="alert('Sign up feature is simulated for demo!')">Sign Up</a></p>
+      <p class="demo-creds">Use: **user** / **password**</p>
+    </div>
+  </div>
+
+  <div id="appContainer" class="page" style="display: none;">
+    
+    <nav class="navbar">
+      <span class="logo">⚙️ Smart Factory System</span>
+      <div class="nav-links">
+        <a href="#" onclick="showPage('homePage')">Home</a>
+        <a href="#" onclick="showPage('bottleneckPage')">Bottleneck</a>
+        <a href="#" onclick="showPage('energyPage')">Energy</a>
+        <a href="#" onclick="showPage('graphPage')">Graph</a>
+        <a href="#" onclick="logout()" class="logout-btn">Logout</a>
+      </div>
+    </nav>
+
+    <div class="content-wrapper">
+      
+      <div id="homePage" class="sub-page active-sub-page">
+        <div class="homepage-content">
+          <h2>👋 Welcome to Your Production Control Center</h2>
+          <p>Select a module to begin monitoring factory performance and optimizing operations.</p>
+          <div class="module-grid">
+            <button class="module-btn bottleneck-module" onclick="showPage('bottleneckPage')">
+              <h3>⚠️ Bottleneck Detector</h3>
+              <p>Analyze cycle times and find production chokepoints.</p>
+            </button>
+            <button class="module-btn energy-module" onclick="showPage('energyPage')">
+              <h3>⚡ Energy Consumption Tracker</h3>
+              <p>Monitor machine power usage and calculated operational cost.</p>
+            </button>
+            <button class="module-btn graph-module" onclick="showPage('graphPage')">
+              <h3>📊 Overall Performance Graph</h3>
+              <p>Visual summary of production output and energy consumption.</p>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div id="bottleneckPage" class="sub-page">
+        <h2>⚠️ Advanced Bottleneck Detector Input</h2>
+        <p class="description-note">Input the Ideal Machine Time (process only) and the Observed Manual Load Time (human element) to diagnose the root cause of delays.</p>
+        <div id="bottleneckInputs" class="input-grid"></div>
+        <button onclick="calculateBottlenecks()">Calculate Performance & Diagnose</button>
+        <div id="bottleneckResults" class="results-grid mt-4"></div>
+      </div>
+
+      <div id="energyPage" class="sub-page">
+        <h2>⚡ Energy Consumption Tracker Input</h2>
+        <div id="energyInputs" class="input-grid"></div>
+        <button onclick="calculateEnergyCost()">Calculate Consumption</button>
+        <div id="energyResults" class="results-grid mt-4"></div>
+      </div>
+
+      <div id="graphPage" class="sub-page">
+        <h2>📊 Daily Performance Overview</h2>
+        <div class="chart-container">
+          <canvas id="productionChart"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
