@@ -14,14 +14,27 @@ const costAlertThreshold = 200;
 
 let myChart;
 
+// --- Production Report Data ---
+const machineData = [
+  { day: "Day 1", machines: ["normal", "normal", "bottleneck", "normal", "normal"] },
+  { day: "Day 2", machines: ["normal", "bottleneck", "normal", "normal", "bottleneck"] },
+  { day: "Day 3", machines: ["normal", "normal", "normal", "bottleneck", "normal"] },
+  { day: "Day 4", machines: ["bottleneck", "normal", "normal", "normal", "normal"] },
+  { day: "Day 5", machines: ["normal", "normal", "bottleneck", "bottleneck", "normal"] },
+  { day: "Day 6", machines: ["normal", "normal", "normal", "normal", "bottleneck"] },
+  { day: "Day 7", machines: ["bottleneck", "bottleneck", "normal", "normal", "normal"] }
+];
+
 // --- Core Calculation Functions ---
 function calculateOutput(cycleTime, runTimeHours) {
   const totalSeconds = runTimeHours * 3600;
   return Math.floor(totalSeconds / cycleTime);
 }
+
 function calculateEnergy(power, runTimeHours) {
   return power * runTimeHours;
 }
+
 function detectBottlenecks(data) {
   const totalManualTime = data.reduce((sum, m) => sum + m.manual_load_time, 0);
   const avgManualTime = totalManualTime / data.length;
@@ -143,6 +156,48 @@ function renderResults(containerId, data, resultType) {
   });
 }
 
+// --- Production Report Functions ---
+function generateReportTable() {
+  const tableBody = document.getElementById('table-body');
+  tableBody.innerHTML = '';
+  
+  machineData.forEach(dayData => {
+    const row = document.createElement('tr');
+    
+    // Add day header cell
+    const dayCell = document.createElement('td');
+    dayCell.textContent = dayData.day;
+    dayCell.className = 'day-header';
+    row.appendChild(dayCell);
+    
+    // Add machine status cells
+    dayData.machines.forEach(status => {
+      const cell = document.createElement('td');
+      const statusSpan = document.createElement('span');
+      statusSpan.textContent = status.charAt(0).toUpperCase() + status.slice(1);
+      statusSpan.className = `status-cell ${status}`;
+      cell.appendChild(statusSpan);
+      row.appendChild(cell);
+    });
+    
+    tableBody.appendChild(row);
+  });
+}
+
+// Function to simulate week reset
+function resetWeek() {
+  const notification = document.getElementById('reset-notification');
+  notification.textContent = "Week completed! Report has been reset to Day 1. Factory manager has been notified.";
+  notification.style.display = 'block';
+  
+  // In a real application, you would reset the data here
+  // For this demo, we'll just regenerate the same table
+  setTimeout(() => {
+    notification.style.display = 'none';
+    generateReportTable();
+  }, 5000);
+}
+
 // --- Core Logic ---
 function calculateBottlenecks() {
   machines.forEach((m, i) => {
@@ -186,7 +241,17 @@ function updateChart() {
         { label: 'Energy Used (kWh)', data: machines.map(m => m.energy), backgroundColor: '#60a5fa' }
       ]
     },
-    options: { responsive: true, scales: { y: { beginAtZero: true } } }
+    options: { 
+      responsive: true, 
+      scales: { y: { beginAtZero: true } },
+      plugins: {
+        legend: {
+          labels: {
+            color: '#333'
+          }
+        }
+      }
+    }
   });
 }
 
@@ -208,6 +273,10 @@ function showPage(pageId) {
     calculateEnergyCost();
   } else if (pageId === 'graphPage') {
     updateChart();
+  } else if (pageId === 'reportPage') {
+    generateReportTable();
+    // Simulate week reset after 10 seconds for demo purposes
+    setTimeout(resetWeek, 10000);
   }
 }
 
@@ -221,6 +290,7 @@ function login() {
     showPage('homePage');
   } else alert('Invalid credentials. Use "user" / "password".');
 }
+
 function logout() {
   document.getElementById('appContainer').style.display = 'none';
   document.getElementById('loginPage').style.display = 'flex';
@@ -234,4 +304,5 @@ document.addEventListener('DOMContentLoaded', () => {
   renderInputs("energyInputs", 'energy');
   calculateBottlenecks();
   calculateEnergyCost();
+  generateReportTable();
 });
